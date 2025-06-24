@@ -6,7 +6,6 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -45,6 +44,7 @@ model Auction {
   product       Product    @relation(fields: [productId], references: [id])
   currentBid    Bid?       @relation("CurrentHighestBid", fields: [currentBidId], references: [id])
   bids          Bid[]
+  callLogs      CallLog[]
   createdAt     DateTime   @default(now())
   updatedAt     DateTime   @updatedAt
 }
@@ -61,10 +61,15 @@ model Bid {
 }
 
 model CallLog {
-  id         String     @id @default(uuid())
+  id         String   @id @default(uuid())
+  user       User     @relation(fields: [userId], references: [id])
   userId     String
-  timestamp  DateTime   @default(now())
-  content    String     // Transcript or summary of the call
-  user       User       @relation(fields: [userId], references: [id])
+  phone      String
+  auction    Auction? @relation(fields: [auctionId], references: [id])
+  auctionId  String?
+  startedAt  DateTime
+  endedAt    DateTime?
+  status     String   // e.g. 'completed', 'missed', 'failed'
+  createdAt  DateTime @default(now())
 }
 
