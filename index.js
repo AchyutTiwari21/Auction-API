@@ -1,9 +1,10 @@
 import express from "express";
 import dotenv from "dotenv";
+import cors from "cors";
+
 import auctionRoutes from "./routes/auction.js";
 import userRoutes from "./routes/user.js";
 import callRoutes from "./routes/call.js";
-import cors from "cors";
 
 dotenv.config({
     path: './.env'
