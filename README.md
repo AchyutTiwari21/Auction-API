@@ -50,6 +50,7 @@ Create a `.env` file in the root directory:
 ```env
 DATABASE_URL="postgresql://<username>:<password>@<host>:<port>/<dbname>"
 PORT=3000
+CORS_ORIGIN=*
 ```
 
 ## 📦 Installation
@@ -61,5 +62,3 @@ cd auction-voice-agent
 npm install
 npx prisma generate
 ```
-
-
