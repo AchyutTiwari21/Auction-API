@@ -1,8 +1,20 @@
-const express = require('express');
+import express from "express";
+import dotenv from "dotenv";
+import auctionRoutes from "./routes/auction.js";
+import userRoutes from "./routes/user.js";
+import callRoutes from "./routes/call.js";
+import cors from "cors";
+
+dotenv.config({
+    path: './.env'
+});
+
 const app = express();
-const auctionRoutes = require('./routes/auction.js');
-const userRoutes = require('./routes/user.js');
-const callRoutes = require('./routes/call.js');
+
+app.use(cors({
+    origin: process.env.CORS_ORIGIN,
+    credentials: true
+}));
 
 app.use(express.json());
 
@@ -10,5 +22,4 @@ app.use('/auctions', auctionRoutes);
 app.use('/users', userRoutes);
 app.use('/calls', callRoutes);
 
-const PORT = 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+app.listen(process.env.PORT, () => console.log(`Server running on port ${process.env.PORT}`));

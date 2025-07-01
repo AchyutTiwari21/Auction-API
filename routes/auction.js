@@ -1,6 +1,7 @@
-const express = require('express');
-const router = express.Router();
-const { PrismaClient } = require('@prisma/client');
+import { Router } from "express";
+import { PrismaClient } from "@prisma/client";
+
+const router = Router();
 const prisma = new PrismaClient();
 
 // GET /auctions - Fetch all active auctions
@@ -153,4 +154,4 @@ router.get('/:id/bids', async (req, res) => {
   }
 });
 
-module.exports = router;
+export default router;
