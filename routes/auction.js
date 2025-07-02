@@ -30,13 +30,17 @@ router.get('/', async (req, res) => {
   }
 });
 
-// GET /auctions/:id - Fetch auction by ID
-router.get('/:id', async (req, res) => {
-  const { id } = req.params;
+// GET /auctions/auction?id=auctionId - Fetch auction by ID
+router.get('/auction', async (req, res) => {
+  const { id } = req.query;
+
+  if (!id) {
+    return res.status(400).json({ error: 'Auction ID is required' });
+  }
 
   try {
     const auction = await prisma.auction.findUnique({
-      where: { id },
+      where: { id: String(id) },
       include: {
         currentBid: true, // Include current highest bid
         bids: {
@@ -45,7 +49,7 @@ router.get('/:id', async (req, res) => {
               select: { id: true, phone: true, name: true }
             }
           },
-          orderBy: { createdAt: 'desc' } // Optional: show latest bids first
+          orderBy: { createdAt: 'desc' }
         }
       }
     });
@@ -61,13 +65,18 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// POST /auctions/:id/bid - Place a bid
-router.post('/:id/bid', async (req, res) => {
-  const auctionId = req.params.id;
+
+// POST /auctions/auction/bid?id=auctionId - Place a bid
+router.post('/auction/bid', async (req, res) => {
+  const auctionId = req.query.id;
   const { userId, bidAmount } = req.body;
 
   if (!userId || !bidAmount) {
     return res.status(400).json({ error: 'userId and bidAmount are required' });
+  }
+
+  if (!auctionId) {
+    return res.status(400).json({ error: 'Auction ID is required' });
   }
 
   try {
@@ -118,9 +127,13 @@ router.post('/:id/bid', async (req, res) => {
   }
 });
 
-// GET /auctions/:id/bids - Get all bids for a specific auction
-router.get('/:id/bids', async (req, res) => {
-  const auctionId = req.params.id;
+// GET /auctions/bids?id=auctionId - Get all bids for a specific auction
+router.get('/bids', async (req, res) => {
+  const auctionId = req.query.id;
+
+  if (!auctionId) {
+    return res.status(400).json({ error: 'Auction ID is required' });
+  }
 
   try {
     const auction = await prisma.auction.findUnique({
