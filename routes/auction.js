@@ -66,22 +66,17 @@ router.get('/auction', async (req, res) => {
 });
 
 
-// POST /auctions/auction/bid?id=auctionId - Place a bid
-router.post('/auction/bid', async (req, res) => {
-  const auctionId = req.query.id;
-  const { userId, bidAmount } = req.body;
+// POST /auctions/bid - Place a bid
+router.post('/bid', async (req, res) => {
+  const { auctionId, userId, bidAmount } = req.body;
 
-  if (!userId || !bidAmount) {
-    return res.status(400).json({ error: 'userId and bidAmount are required' });
-  }
-
-  if (!auctionId) {
-    return res.status(400).json({ error: 'Auction ID is required' });
+  if (!auctionId || !userId || !bidAmount) {
+    return res.status(400).json({ error: 'auctionId, userId and bidAmount are required' });
   }
 
   try {
     const auction = await prisma.auction.findUnique({
-      where: { id: auctionId },
+      where: { id: String(auctionId) },
       include: { currentBid: true },
     });
 
