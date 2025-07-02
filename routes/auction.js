@@ -17,6 +17,7 @@ router.get('/', async (req, res) => {
       },
       include: {
         currentBid: true,
+        product: true
       },
       orderBy: {
         endTime: 'asc',
@@ -43,6 +44,7 @@ router.get('/auction', async (req, res) => {
       where: { id: String(id) },
       include: {
         currentBid: true, // Include current highest bid
+        product: true, // Include product details
         bids: {
           include: {
             user: {
