@@ -16,8 +16,13 @@ router.get('/', async (req, res) => {
         },
       },
       include: {
-        currentBid: true,
-        product: true
+        product: {
+          select: {
+            name: true,
+            description: true,
+            imageUrl: true
+          }
+        }
       },
       orderBy: {
         endTime: 'asc',
