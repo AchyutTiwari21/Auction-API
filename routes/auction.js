@@ -180,4 +180,50 @@ router.get('/bids', async (req, res) => {
   }
 });
 
+// GET /auctions/allBids - Get all bids in the auction
+router.get('/allBids', async (req, res) => {
+  try {
+
+    const bids = await prisma.bid.findMany({
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            phone: true,
+            email: true,
+            picture: true
+          }
+        },
+        auction: {
+            select: {
+              id: true,
+              startTime: true,
+              endTime: true,
+              product: {
+                select: {
+                  name: true,
+                  imageUrl: true
+                }
+              },
+              currentBid: {
+                select: {
+                  amount: true
+                }
+              }
+            }
+          }
+      },
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
+
+    res.status(200).json(bids);
+  } catch (error) {
+    console.error('Error fetching bids:', error);
+    res.status(500).json({ error: 'Failed to fetch bids' });
+  }
+});
+
 export default router;
