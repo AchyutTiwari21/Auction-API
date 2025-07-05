@@ -7,14 +7,9 @@ const prisma = new PrismaClient();
 // GET /auctions - Fetch all active auctions
 router.get('/', async (req, res) => {
   try {
-    const now = new Date();
+    // const now = new Date();
 
-    const auctions = await prisma.auction.findMany({
-      where: {
-        endTime: {
-          gt: now,
-        },
-      },
+   const auctions = await prisma.auction.findMany({
       include: {
         product: {
           select: {
@@ -22,12 +17,28 @@ router.get('/', async (req, res) => {
             description: true,
             imageUrl: true
           }
+        },
+        currentBid: true,
+        bids: {
+          select: {
+            id: true,
+            amount: true,
+            createdAt: true,
+            user: {
+              select: {
+                id: true,
+                name: true,
+                picture: true
+              }
+            }
+          }
         }
       },
       orderBy: {
-        endTime: 'asc',
-      },
-    });
+        endTime: 'asc'
+     }
+  });
+
 
     res.status(200).json(auctions);
   } catch (error) {
