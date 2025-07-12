@@ -19,6 +19,10 @@ app.use(cors({
 
 app.use(express.json());
 
+app.get('/keep-alive', (req, res) => {
+  res.status(200).send('OK');
+});
+
 app.use('/auctions', auctionRoutes);
 app.use('/users', userRoutes);
 app.use('/calls', callRoutes);

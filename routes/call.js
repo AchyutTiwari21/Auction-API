@@ -34,4 +34,28 @@ router.post('/', async (req, res) => {
   }
 });
 
+// GET /calls - Retrieve call logs 
+router.get('/callLogs', async (req, res) => {
+  try {
+    const callLogs = await prisma.callLog.findMany({
+      include: {
+        user: {
+          select: {
+            id: true,
+            name: true,
+            picture: true,
+            email: true,
+          },
+        },
+      },
+      orderBy: { startedAt: 'desc' },
+    });
+
+    res.status(200).json(callLogs);
+  } catch (error) {
+    console.error('Error retrieving call logs:', error);
+    res.status(500).json({ error: 'Failed to retrieve call logs' });
+  }
+});
+
 export default router;
