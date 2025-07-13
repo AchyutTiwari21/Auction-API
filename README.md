@@ -59,8 +59,7 @@ Create a `.env` file in the root directory:
 ```env
 DATABASE_URL=postgresql://user:password@localhost:5432/auction-assist
 PORT=5000
-TWILIO_ACCOUNT_SID=your_sid
-TWILIO_AUTH_TOKEN=your_token
+CORS_ORIGIN=*
 ```
 
 ### 4. Set up Prisma
@@ -123,7 +122,7 @@ else status = 'Active';
 
 For development:
 
-```ts
+```js
 app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true
