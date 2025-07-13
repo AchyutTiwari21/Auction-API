@@ -143,10 +143,4 @@ Ensure your database and environment variables are correctly set in production. 
 
 ---
 
-## 📄 License
-
-MIT License – feel free to fork, modify, or contribute.
-
----
-
 Built for scalable, real-time auctions with ❤️
