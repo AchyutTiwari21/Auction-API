@@ -139,7 +139,7 @@ Ensure your database and environment variables are correctly set in production. 
 
 ## 🧩 Related Projects
 
-- 🎯 [Auction Assist Frontend](https://github.com/your-username/auction-assist-frontend) – React + Tailwind + ShadCN
+- 🎯 [Auction Assist Frontend](https://github.com/AchyutTiwari21/Auction-Assistant) – React + Tailwind + ShadCN
 
 ---
 
