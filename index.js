@@ -1,10 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-
-import auctionRoutes from "./routes/auction.js";
-import userRoutes from "./routes/user.js";
-import callRoutes from "./routes/call.js";
+import cookieParser from "cookie-parser";
 
 dotenv.config({
     path: './.env'
@@ -17,11 +14,18 @@ app.use(cors({
     credentials: true
 }));
 
-app.use(express.json());
+app.use(express.json({limit: "1mb"}));
+app.use(express.urlencoded({extended: true, limit: "1mb"}));
+app.use(express.static("public"));
+app.use(cookieParser());
 
 app.get('/keep-alive', (req, res) => {
   res.status(200).send('OK');
 });
+
+import auctionRoutes from "./routes/auction.route.js";
+import userRoutes from "./routes/user.route.js";
+import callRoutes from "./routes/call.route.js";
 
 app.use('/auctions', auctionRoutes);
 app.use('/users', userRoutes);

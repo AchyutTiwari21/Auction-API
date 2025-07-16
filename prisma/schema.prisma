@@ -13,19 +13,26 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum AuthProvider {
+  local
+  google
+}
+
 model User {
-  id            String     @id @default(uuid())
-  phone         String     @unique
-  name          String?
+  id            String        @id @default(uuid())
+  username      String?       @unique
+  googleId      String?       @unique
+  password      String?     
+  name          String
   picture       String?
-  email         String?    @unique
-  totalBids     Int        @default(0) // Total number of bids placed by the user
-  accessToken   String?    // Stores access token (e.g., JWT)
-  refreshToken  String?    // Stores refresh token
+  email         String        @unique
+  totalBids     Int           @default(0) // Total number of bids placed by the user
+  refreshToken  String?       // Stores refresh token
+  authProvider  AuthProvider  @default(local)
   bids          Bid[]
   callLogs      CallLog[]
-  createdAt     DateTime   @default(now())
-  updatedAt     DateTime   @updatedAt
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
 }
 
 
