@@ -6,7 +6,7 @@ const prismaClient = new PrismaClient();
 
 export const registerUser = asyncHandler(async(req, res) => {
 
-    const {username, password, name, picture, email} = req.body;
+    const {username, password, name, email} = req.body;
 
     if(!username || !password || !name || !email) {
         res.status(400).json({
@@ -38,8 +38,7 @@ export const registerUser = asyncHandler(async(req, res) => {
             username,
             name,
             email,
-            password: hashedPassword,
-            picture
+            password: hashedPassword
         }
     });
 
@@ -47,7 +46,7 @@ export const registerUser = asyncHandler(async(req, res) => {
         res.status(201).json(
             new ApiResponse(
                 201,
-                { id: user.id, username: user.username, name: user.name, picture: user.picture, email: user.email },
+                { id: user.id, username: user.username, name: user.name, picture: user?.picture, email: user.email },
                 "User has been signed up",
                 true
             )
@@ -55,7 +54,8 @@ export const registerUser = asyncHandler(async(req, res) => {
         return;
     } else {
         res.status(500).json({
-            message: "Something went wrong while registering the user.s"
+            message: "Something went wrong while registering the users",
+            success: false
         });
         return;
     }
