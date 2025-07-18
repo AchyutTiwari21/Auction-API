@@ -1,4 +1,4 @@
-import { asyncHandler, ApiResponse } from "../utils";
+import { asyncHandler, ApiResponse } from "../../utils";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
