@@ -1,4 +1,4 @@
-import { asyncHandler, ApiResponse } from "../utils";
+import { asyncHandler } from "../../utils";
 import { PrismaClient } from "@prisma/client/extension";
 
 const prismaClient = new PrismaClient();
@@ -30,4 +30,4 @@ export const getUsers = asyncHandler(async(req, res) => {
             success: false
         });
     }
-})
+});
