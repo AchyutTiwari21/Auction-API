@@ -1,5 +1,5 @@
-import { registerUser } from "./registerUser.controller";
-import { getUsers } from "./getUsers.controller";
+import { registerUser } from "./registerUser.controller.js";
+import { getUsers } from "./getUsers.controller.js";
 
 export {
     registerUser,

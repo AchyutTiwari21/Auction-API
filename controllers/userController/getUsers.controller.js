@@ -1,5 +1,5 @@
-import { asyncHandler } from "../../utils";
-import { PrismaClient } from "@prisma/client/extension";
+import { asyncHandler } from "../../utils/index.js";
+import { PrismaClient } from "@prisma/client";
 
 const prismaClient = new PrismaClient();
 

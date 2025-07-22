@@ -1,4 +1,4 @@
-import { asyncHandler, ApiResponse } from "../../utils";
+import { asyncHandler, ApiResponse } from "../../utils/index.js";
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 
@@ -46,7 +46,7 @@ export const registerUser = asyncHandler(async(req, res) => {
         res.status(201).json(
             new ApiResponse(
                 201,
-                { id: user.id, username: user.username, name: user.name, picture: user?.picture, email: user.email },
+                null,
                 "User has been signed up",
                 true
             )
