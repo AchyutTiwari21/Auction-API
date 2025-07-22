@@ -43,9 +43,12 @@ export const signinUser = asyncHandler(async(req, res) => {
 
     const { accessToken, refreshToken } = generateAccessAndRefreshTokens(user);
 
-    const loggedInUser = await prismaClient.user.findFirst({
+    const loggedInUser = await prismaClient.user.update({
         where: {
             id: user.id
+        },
+        data: {
+            refreshToken: refreshToken
         },
         select: {
             id: true,
