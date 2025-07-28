@@ -52,7 +52,7 @@ export const signinUser = asyncHandler(async(req, res) => {
         },
         select: {
             id: true,
-            username: true,
+            dob: true,
             name: true,
             picture: true,
             email: true,

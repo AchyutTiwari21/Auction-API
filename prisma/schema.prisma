@@ -20,12 +20,12 @@ enum AuthProvider {
 
 model User {
   id            String        @id @default(uuid())
-  username      String?       @unique
   googleId      String?       @unique
   password      String?     
   name          String
   picture       String?
   email         String        @unique
+  dob           DateTime?
   totalBids     Int           @default(0) // Total number of bids placed by the user
   refreshToken  String?       // Stores refresh token
   authProvider  AuthProvider  @default(local)
