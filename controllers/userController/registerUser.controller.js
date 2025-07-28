@@ -9,10 +9,10 @@ export const registerUser = asyncHandler(async(req, res) => {
     const {username, password, name, email} = req.body;
 
     if(!username || !password || !name || !email) {
-        res.status(400).json({
+        return res.status(400).json({
             message: "All fields are required.",
             success: false
-        })
+        });
     }
 
     // checking if user is present or not
@@ -26,9 +26,9 @@ export const registerUser = asyncHandler(async(req, res) => {
     });
 
     if(existedUser) {
-        res.status(409).json({
+        return res.status(409).json({
             message: "User already existed with username or email."
-        })
+        });
     }
 
     const hashedPassword = await bcrypt.hash(password, 5);
