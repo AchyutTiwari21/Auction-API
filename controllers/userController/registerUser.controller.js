@@ -18,9 +18,7 @@ export const registerUser = asyncHandler(async(req, res) => {
     // checking if user is present or not
     const existedUser = await prismaClient.user.findFirst({
         where: {
-            OR: [
-                {email}
-            ]
+            email
         }
     });
 
@@ -36,7 +34,7 @@ export const registerUser = asyncHandler(async(req, res) => {
         data: {
             name,
             email,
-            dob,
+            dob: new Date(dob),
             password: hashedPassword
         }
     });
