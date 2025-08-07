@@ -7,11 +7,11 @@ const prismaClient = new PrismaClient();
 
 export const signinUser = asyncHandler(async(req, res) => {
 
-    const {email, username, password} = req.body;
+    const {email, password} = req.body;
 
-    if(!username && !email) {
+    if(!email) {
         return res.status(400).json({
-            message: "Username or email is required",
+            message: "Email is required",
             status: false
         });
     }
@@ -19,8 +19,7 @@ export const signinUser = asyncHandler(async(req, res) => {
     const user = await prismaClient.user.findFirst({
         where: {
             OR: [
-                { email: email },
-                { username: username }
+                { email: email }
             ]
         }
     });
@@ -56,6 +55,7 @@ export const signinUser = asyncHandler(async(req, res) => {
             name: true,
             picture: true,
             email: true,
+            dob: true,
             totalBids: true
         }
     })
