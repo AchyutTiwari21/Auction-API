@@ -24,7 +24,7 @@ export const signinUser = asyncHandler(async(req, res) => {
 
     if(!user) {
         return res.status(404).json({
-            message: "User does not exist with this username or email",
+            message: "User does not exist with this email",
             status: false
         });
     }

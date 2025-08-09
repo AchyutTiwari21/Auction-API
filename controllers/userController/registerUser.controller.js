@@ -24,7 +24,7 @@ export const registerUser = asyncHandler(async(req, res) => {
 
     if(existedUser) {
         return res.status(409).json({
-            message: "User already existed with username or email."
+            message: "User already existed with email."
         });
     }
 

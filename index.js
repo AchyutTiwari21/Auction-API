@@ -23,6 +23,11 @@ app.get('/keep-alive', (req, res) => {
   res.status(200).send('OK');
 });
 
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send(err.message);
+});
+
 import auctionRoutes from "./routes/auction.route.js";
 import userRoutes from "./routes/user.route.js";
 import callRoutes from "./routes/call.route.js";
