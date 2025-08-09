@@ -26,7 +26,7 @@ export const getAllBids = asyncHandler(async (req, res) => {
                     select: {
                         id: true,
                         name: true,
-                        phone: true,
+                        email: true
                     },
                 },
             },

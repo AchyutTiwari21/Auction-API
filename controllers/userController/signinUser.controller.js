@@ -18,9 +18,7 @@ export const signinUser = asyncHandler(async(req, res) => {
 
     const user = await prismaClient.user.findFirst({
         where: {
-            OR: [
-                { email: email }
-            ]
+            email
         }
     });
 
@@ -51,7 +49,6 @@ export const signinUser = asyncHandler(async(req, res) => {
         },
         select: {
             id: true,
-            dob: true,
             name: true,
             picture: true,
             email: true,

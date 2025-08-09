@@ -36,11 +36,11 @@ export const placeBid = asyncHandler(async (req, res) => {
         const floatBidAmount = parseFloat(bidAmount);
         // Create the new bid
         const newBid = await prismaClient.bid.create({
-        data: {
-            amount: floatBidAmount,
-            user: { connect: { id: userId } },
-            auction: { connect: { id: auctionId } },
-        },
+            data: {
+                amount: floatBidAmount,
+                user: { connect: { id: userId } },
+                auction: { connect: { id: auctionId } },
+            },
         });
 
         // Update the auction with the new highest bid

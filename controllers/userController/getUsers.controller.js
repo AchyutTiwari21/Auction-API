@@ -9,7 +9,6 @@ export const getUsers = asyncHandler(async(req, res) => {
         id: true,
         name: true,
         email: true,
-        phone: true,
         picture: true,
         bids: {
           select: {

@@ -19,7 +19,7 @@ export const fetchAuctionById = asyncHandler(async (req, res) => {
             bids: {
             include: {
                 user: {
-                   select: { id: true, phone: true, name: true }
+                   select: { id: true, name: true, email: true }
                 }
             },
             orderBy: { createdAt: 'desc' }
