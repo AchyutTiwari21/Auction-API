@@ -7,7 +7,9 @@ const prismaClient = new PrismaClient();
 
 export const verifyJWT = asyncHandler(async (req, res, next) => {
     try {
-        const token = req.cookies?.accessToken || req.headers("authorization")?.replace("Bearer ", "");
+        const token =
+            req.cookies?.accessToken ||
+            req.headers["authorization"]?.replace("Bearer ", "");
     
         if(!token) {
             throw new ApiError(401, "Unauthorized request");
