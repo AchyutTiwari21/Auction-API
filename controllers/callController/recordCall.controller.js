@@ -4,17 +4,17 @@ import { PrismaClient } from "@prisma/client";
 const prismaClient = new PrismaClient();
 
 export const recordCall = asyncHandler(async (req, res) => {
-    const { userId, phone, auctionId, startedAt, endedAt, status } = req.body;
+    const { userId, email, auctionId, startedAt, endedAt, status } = req.body;
 
-    if (!userId || !phone || !startedAt || !status) {
-        return res.status(400).json({ error: 'Missing required fields: userId, phone, startedAt, or status' });
+    if (!userId || !email || !startedAt || !status) {
+        return res.status(400).json({ error: 'Missing required fields: userId, email, startedAt, or status' });
     }
 
     try {
         const newCall = await prismaClient.callLog.create({
             data: {
                 userId,
-                phone,
+                email,
                 auctionId: auctionId || null,
                 startedAt: new Date(startedAt),
                 endedAt: endedAt ? new Date(endedAt) : null,
