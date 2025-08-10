@@ -14,7 +14,7 @@ router.route('/signup').post(registerUser);
 router.route('/signin').post(signinUser);
 router.route('/signout').post(verifyJWT, signoutUser);
 
-router.route('/me').get(getUserData);
-router.route('/getAllUsers').get(getUsers);
+router.route('/me').get(verifyJWT, getUserData);
+router.route('/getAllUsers').get(verifyJWT, getUsers);
 
 export default router;
