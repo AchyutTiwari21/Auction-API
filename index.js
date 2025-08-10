@@ -11,6 +11,7 @@ const app = express();
 
 app.use(cors({
     origin: [process.env.FRONTEND_ORIGIN, process.env.OMNI_DIMENSION_ORIGIN],
+    methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true
 }));
 
