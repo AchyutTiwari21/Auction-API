@@ -17,13 +17,6 @@ export const identifyUser = asyncHandler(async (req, res) => {
     const user = await prismaClient.user.findFirst({
         where: {
             username
-        },
-        select: {
-            id: true,
-            name: true,
-            email: true,
-            username: true,
-            totalBids: true
         }
     });
 
@@ -43,5 +36,18 @@ export const identifyUser = asyncHandler(async (req, res) => {
         });
     }
 
-    return res.status(200).json(user);
+    const loggedInUser = await prismaClient.user.findFirst({
+        where: {
+            username
+        },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            username: true,
+            totalBids: true
+        }
+    });
+
+    return res.status(200).json(loggedInUser);
 })
