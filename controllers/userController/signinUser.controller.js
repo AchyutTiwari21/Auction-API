@@ -7,24 +7,24 @@ const prismaClient = new PrismaClient();
 
 export const signinUser = asyncHandler(async(req, res) => {
 
-    const {email, password} = req.body;
+    const {username, password} = req.body;
 
-    if(!email) {
+    if(!username) {
         return res.status(400).json({
-            message: "Email is required",
+            message: "Username is required",
             status: false
         });
     }
 
     const user = await prismaClient.user.findFirst({
         where: {
-            email
+            username
         }
     });
 
     if(!user) {
         return res.status(404).json({
-            message: "User does not exist with this email",
+            message: "User does not exist with this username.",
             status: false
         });
     }
@@ -52,6 +52,7 @@ export const signinUser = asyncHandler(async(req, res) => {
             name: true,
             picture: true,
             email: true,
+            username: true,
             dob: true,
             totalBids: true
         }

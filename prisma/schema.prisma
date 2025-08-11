@@ -23,6 +23,7 @@ model User {
   googleId      String?       @unique
   password      String?     
   name          String
+  username      String        @unique
   picture       String?
   email         String        @unique
   dob           DateTime?

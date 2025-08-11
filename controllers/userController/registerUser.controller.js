@@ -6,9 +6,9 @@ const prismaClient = new PrismaClient();
 
 export const registerUser = asyncHandler(async(req, res) => {
 
-    const {name, email, dob, password} = req.body;
+    const {name, email, username, dob, password} = req.body;
 
-    if(!name || !email || !dob || !password) {
+    if(!name || !email || !username || !dob || !password) {
         return res.status(400).json({
             message: "All fields are required.",
             success: false
@@ -34,6 +34,7 @@ export const registerUser = asyncHandler(async(req, res) => {
         data: {
             name,
             email,
+            username,
             dob: new Date(dob),
             password: hashedPassword
         }

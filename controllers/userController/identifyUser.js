@@ -5,18 +5,25 @@ import bcrypt from "bcrypt";
 const prismaClient = new PrismaClient();
 
 export const identifyUser = asyncHandler(async (req, res) => {
-    const { email, password } = req.body;
+    const { username, password } = req.body;
 
-    if (!email || !password) {
+    if (!username || !password) {
         return res.status(400).json({
-            message: "Email and password are required", 
+            message: "Username and password are required", 
             success: false
         });
     }
 
     const user = await prismaClient.user.findFirst({
         where: {
-            email
+            username
+        },
+        select: {
+            id: true,
+            name: true,
+            email: true,
+            username: true,
+            totalBids: true
         }
     });
 
@@ -36,12 +43,5 @@ export const identifyUser = asyncHandler(async (req, res) => {
         });
     }
 
-    return res.status(200).json({
-        user: {
-            id: user.id,
-            name: user.name,
-            email: user.email,
-            totalBids: user.totalBids
-        },
-    });
+    return res.status(200).json(user);
 })
