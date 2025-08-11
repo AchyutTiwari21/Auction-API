@@ -3,11 +3,13 @@ import { getUsers } from "./getUsers.controller.js";
 import { signinUser } from "./signinUser.controller.js";
 import { signoutUser } from "./signoutUser.controller.js";
 import { getUserData } from "./getUserData.controller.js";
+import { identifyUser } from "./identifyUser.js";
 
 export {
     registerUser,
     getUsers,
     signinUser,
+    identifyUser,
     signoutUser,
     getUserData
 }

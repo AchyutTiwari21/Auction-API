@@ -4,7 +4,8 @@ import {
   getUsers,
   signinUser,
   signoutUser,
-  getUserData
+  getUserData,
+  identifyUser
 } from "../controllers/userController/index.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -15,6 +16,7 @@ router.route('/signin').post(signinUser);
 router.route('/signout').post(verifyJWT, signoutUser);
 
 router.route('/me').get(verifyJWT, getUserData);
-router.route('/getAllUsers').get(verifyJWT, getUsers);
+router.route('/getAllUsers').get(getUsers);
+router.route('/identifyUser').post(identifyUser);
 
 export default router;
