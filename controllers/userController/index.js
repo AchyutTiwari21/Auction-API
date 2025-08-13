@@ -4,6 +4,7 @@ import { signinUser } from "./signinUser.controller.js";
 import { signoutUser } from "./signoutUser.controller.js";
 import { getUserData } from "./getUserData.controller.js";
 import { identifyUser } from "./identifyUser.js";
+import { addUserPicture } from "./addUserPicture.js";
 
 export {
     registerUser,
@@ -11,5 +12,6 @@ export {
     signinUser,
     identifyUser,
     signoutUser,
-    getUserData
+    getUserData,
+    addUserPicture
 }
