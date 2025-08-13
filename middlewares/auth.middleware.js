@@ -7,8 +7,6 @@ const prismaClient = new PrismaClient();
 
 export const verifyJWT = asyncHandler(async (req, res, next) => {
     try {
-        console.log("Access Tokien: ", req.headers["authorization"]);
-        
         const token =
             req.cookies?.accessToken ||
             req.headers["authorization"]?.replace("Bearer ", "");

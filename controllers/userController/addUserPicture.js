@@ -7,10 +7,7 @@ const prismaClient = new PrismaClient();
 export const addUserPicture = asyncHandler(async (req, res) => {
     try {
         const user = req?.user;
-
-        console.log("Body: ", req.body);
-        console.log("File: ", req.file);
-    
+        
         if (!user) {
             return res.status(500).json({
                 message: "User not found",
@@ -75,4 +72,4 @@ export const addUserPicture = asyncHandler(async (req, res) => {
             message: error.message || "Internal Server Error"
         });
     }
-})
+});

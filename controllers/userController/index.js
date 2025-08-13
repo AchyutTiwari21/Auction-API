@@ -6,6 +6,7 @@ import { getUserData } from "./getUserData.controller.js";
 import { identifyUser } from "./identifyUser.js";
 import { addUserPicture } from "./addUserPicture.js";
 import { updateUser } from "./updateUser.controller.js";
+import { removeUserPicture } from "./removeUserPicture.js";
 
 export {
     registerUser,
@@ -15,5 +16,6 @@ export {
     identifyUser,
     signoutUser,
     getUserData,
-    addUserPicture
+    addUserPicture,
+    removeUserPicture
 }

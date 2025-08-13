@@ -7,7 +7,8 @@ import {
   getUserData,
   identifyUser,
   addUserPicture,
-  updateUser
+  updateUser,
+  removeUserPicture
 } from "../controllers/userController/index.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 import { upload } from "../middlewares/multer.middleware.js";
@@ -23,6 +24,7 @@ router.route('/getAllUsers').get(getUsers);
 router.route('/identifyUser').post(identifyUser);
 
 router.route('/addUserPicture').post(verifyJWT, upload.single('picture'), addUserPicture);
+router.route('/removeUserPicture').put(verifyJWT, removeUserPicture);
 
 router.route('/updateUser').put(verifyJWT, updateUser);
 
