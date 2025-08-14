@@ -6,7 +6,7 @@ export const getUserData = asyncHandler(async(req, res) => {
     return res.status(200).json(
         new ApiResponse(
             200,
-            user,
+            {id: 1, name: "John Doe"},
             "User Data retrieved successfully."
         )
     );
