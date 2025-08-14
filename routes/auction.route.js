@@ -4,8 +4,10 @@ import {
   fetchAuctionById,
   getAllAuctionBids,
   getAllBids,
+  getUserBids,
   placeBid,
 } from "../controllers/auctionController/index.js";
+import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router();
 
@@ -23,5 +25,8 @@ router.route('/bids').get(getAllBids);
 
 // GET /auctions/allBids - Get all bids in the auction
 router.route('/allBids').get(getAllAuctionBids);
+
+// GET /auctions/userBids - Get all bids made by the authenticated user
+router.route('/userBids').get(verifyJWT, getUserBids);
 
 export default router;
