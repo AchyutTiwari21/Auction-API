@@ -23,9 +23,8 @@ export const verifyJWT = asyncHandler(async (req, res, next) => {
             },
             select: {
                 id: true,
-                dob: true,
                 name: true,
-                picture: true,
+                dob: true,
                 email: true,
                 totalBids: true
             }
