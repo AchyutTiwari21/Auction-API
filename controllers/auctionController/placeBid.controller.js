@@ -29,7 +29,8 @@ export const placeBid = asyncHandler(async (req, res) => {
 
         if (bidAmount <= currentHighest) {
             return res.status(400).json({
-                error: `Bid must be higher than the current bid of ${currentHighest}`,
+                message: `Bid must be higher than the current bid of ${currentHighest}`,
+                success: false
             });
         }
 
@@ -56,4 +57,4 @@ export const placeBid = asyncHandler(async (req, res) => {
         console.error('Error placing bid:', error);
         return res.status(500).json({ error: 'Failed to place bid' });
     }
-})
+});

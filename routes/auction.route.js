@@ -6,6 +6,7 @@ import {
   getAllBids,
   getUserBids,
   placeBid,
+  cancelBid,
   getWinningBids
 } from "../controllers/auctionController/index.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
@@ -20,6 +21,9 @@ router.route('/auction').get(fetchAuctionById);
 
 // POST /auctions/bid - Place a bid
 router.route('/bid').post(placeBid);
+
+// DELETE /auctions/cancelBid/:bidId - Cancel a bid
+router.route('/cancelBid/:bidId').delete(verifyJWT, cancelBid);
 
 // GET /auctions/bids?id=auctionId - Get all bids for a specific auction
 router.route('/bids').get(getAllBids);
