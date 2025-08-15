@@ -4,6 +4,7 @@ import { getAllAuctionBids } from "./getAllAuctionBids.js";
 import { getAllBids } from "./getAllBids.controller.js";
 import { placeBid } from "./placeBid.controller.js";
 import { getUserBids } from "./getUserBids.js";
+import { getWinningBids } from "./getWinningBids.js";
 
 export {
     fetchAuction,
@@ -12,4 +13,5 @@ export {
     getUserBids,
     getAllBids,
     placeBid,
+    getWinningBids
 }

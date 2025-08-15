@@ -6,6 +6,7 @@ import {
   getAllBids,
   getUserBids,
   placeBid,
+  getWinningBids
 } from "../controllers/auctionController/index.js";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
@@ -27,6 +28,9 @@ router.route('/bids').get(getAllBids);
 router.route('/allBids').get(getAllAuctionBids);
 
 // GET /auctions/userBids - Get all bids made by the authenticated user
-router.route('/userBids').get(verifyJWT, getUserBids);
+router.route('/userBids').get(verifyJWT, getUserBids);  
+
+// GET /auctions/winningBids - Get all winning bids for the authenticated user
+router.route('/winningBids').get(verifyJWT, getWinningBids);
 
 export default router;

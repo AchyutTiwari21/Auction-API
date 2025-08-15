@@ -3,7 +3,7 @@ import { PrismaClient } from "@prisma/client";
 
 const prismaClient = new PrismaClient();
 
-export const getUserBids = asyncHandler(async (req, res) => {
+export const getWinningBids = asyncHandler(async (req, res) => {
     const user = req.user;
 
     if(!user) {
@@ -51,7 +51,9 @@ export const getUserBids = asyncHandler(async (req, res) => {
             });
         }
 
-        return res.status(200).json(bids);
+        const winningBids = bids.filter(bid => bid.auction.currentBid.id === bid.id && new Date(bid.auction.endTime) < new Date());
+
+        return res.status(200).json(winningBids);
     } catch (error) {
         console.log(error.message || "Error while fetching user bids");
         return res.status(500).json({
