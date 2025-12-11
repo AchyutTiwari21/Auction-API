@@ -10,10 +10,27 @@ dotenv.config({
 const app = express();
 
 app.use(cors({
-    origin: [process.env.FRONTEND_ORIGIN, process.env.OMNI_DIMENSION_ORIGIN],
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    credentials: true
+  origin: (origin, callback) => {
+    const allowedOrigins = [
+      process.env.FRONTEND_URL, 
+      /^https:\/\/.*\.omnidim\.io$/,
+      /^https:\/\/.*\.omnidimension\.ai$/
+    ];
+
+    if (!origin) {
+      return callback(null, true); // allow server-to-server calls
+    }
+
+    const isAllowed = allowedOrigins.some(o =>
+      typeof o === "string" ? o === origin : o.test(origin)
+    );
+
+    callback(null, isAllowed ? true : false);
+  },
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  credentials: true
 }));
+
 
 app.use(express.json({limit: "1mb"}));
 app.use(express.urlencoded({extended: true, limit: "1mb"}));
